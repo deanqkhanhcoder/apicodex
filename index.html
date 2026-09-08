@@ -115,7 +115,7 @@
     <section class="dashboard section" id="dashboard">
       <div class="dashboard-copy">
         <h2>Mọi token đều nhìn thấy.</h2>
-        <p>Theo dõi mức sử dụng, API Key và số dư tại dashboard quản lý. Dữ liệu minh bạch theo mức dùng thực tế.</p>
+        <p>Theo dõi mức sử dụng, API Key và số dư tại dashboard quản lý. Dữ liệu minh bạch theo mức dùng thực tế với biểu đồ phụ tải và số dư tài nguyên trực quan.</p>
         <dl>
           <div><dt>Guest password</dt><dd><button class="copy-value" data-copy="0899759653" type="button">0899759653 <span>Chép</span></button></dd></div>
           <div><dt>Trạng thái</dt><dd><span class="status-dot"></span> Trực tuyến 24/7</dd></div>
@@ -126,8 +126,19 @@
         </div>
       </div>
       <div class="dashboard-visual">
-        <div class="window-bar"><span></span><span></span><span></span><strong>API Codex / Dashboard</strong></div>
-        <img src="assets/document-1.png" alt="Giao diện dashboard quản lý API Codex" width="1920" height="1040">
+        <div class="window-bar">
+          <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="dash-tabs" role="tablist" aria-label="Chế độ hiển thị dashboard">
+            <button type="button" class="dash-tab active" id="tab-dash-lb" role="tab" aria-selected="true" aria-controls="view-dash-lb">Dashboard CodexLB</button>
+            <button type="button" class="dash-tab" id="tab-dash-app" role="tab" aria-selected="false" aria-controls="view-dash-app">Codex App thực tế</button>
+          </div>
+        </div>
+        <div class="dash-panel active" id="view-dash-lb" role="tabpanel" aria-labelledby="tab-dash-lb">
+          <img src="assets/dashboard-stats.png" alt="Giao diện dashboard quản trị và theo dõi phụ tải token CodexLB" width="1920" height="925">
+        </div>
+        <div class="dash-panel" id="view-dash-app" role="tabpanel" aria-labelledby="tab-dash-app" hidden>
+          <img src="assets/document-1.png" alt="Giao diện Codex desktop app không bị tụt hạn mức khi dùng API" width="1920" height="1040">
+        </div>
       </div>
     </section>
 

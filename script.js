@@ -59,6 +59,34 @@ osTabs.forEach((tab) => {
   })
 })
 
+// Dashboard View Tabs in #dashboard
+const dashTabs = document.querySelectorAll('.dash-tab')
+const dashPanels = document.querySelectorAll('.dash-panel')
+
+dashTabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const targetId = tab.getAttribute('aria-controls')
+
+    dashTabs.forEach((t) => {
+      t.classList.remove('active')
+      t.setAttribute('aria-selected', 'false')
+    })
+    dashPanels.forEach((p) => {
+      p.classList.remove('active')
+      p.hidden = true
+    })
+
+    tab.classList.add('active')
+    tab.setAttribute('aria-selected', 'true')
+
+    const targetPanel = document.getElementById(targetId)
+    if (targetPanel) {
+      targetPanel.hidden = false
+      targetPanel.classList.add('active')
+    }
+  })
+})
+
 // Copy individual snippet
 document.querySelectorAll('.copy-snippet').forEach((btn) => {
   btn.addEventListener('click', async () => {

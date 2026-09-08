@@ -104,9 +104,15 @@ dd { margin: 0; font-size: 12px; font-weight: 700; }
 .copy-value span { margin-left: 8px; color: var(--link); font-size: 9px; }
 .status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: var(--mint); }
 .dashboard-visual { min-width: 720px; padding: 13px 0 13px 13px; background: #fff; box-shadow: 0 28px 65px rgba(23,54,93,.2); }
-.window-bar { height: 39px; display: flex; align-items: center; gap: 7px; padding: 0 16px; background: #edf2f7; }
-.window-bar span { width: 8px; height: 8px; border-radius: 50%; background: #b6c3cf; }
-.window-bar strong { margin-left: 10px; color: var(--muted); font-size: 9px; }
+.window-bar { min-height: 42px; display: flex; align-items: center; justify-content: space-between; padding: 6px 16px; background: #edf2f7; border-bottom: 1px solid #d8e2ec; }
+.window-bar .window-dots { display: flex; gap: 6px; }
+.window-bar .window-dots span { width: 8px; height: 8px; border-radius: 50%; background: #b6c3cf; }
+.dash-tabs { display: flex; gap: 6px; }
+.dash-tab { padding: 4px 12px; background: transparent; border: 1px solid transparent; font-size: 11px; font-weight: 700; color: var(--muted); cursor: pointer; transition: all .15s; }
+.dash-tab:hover { color: var(--navy); }
+.dash-tab.active { background: #fff; color: var(--navy); border-color: #cbd8e5; box-shadow: 0 1px 3px rgba(16,35,59,.06); }
+.dash-panel { display: none; }
+.dash-panel.active { display: block; animation: fadeIn .2s ease; }
 
 /* Guide Teaser on Homepage */
 .guide-teaser { background: var(--white); }
@@ -300,6 +306,9 @@ footer > span { justify-self: end; }
   .dashboard { padding-right: 0; }
   .dashboard-copy { padding-right: 20px; }
   .dashboard-visual { min-width: 0; width: 100%; padding: 8px 0 8px 8px; }
+  .window-bar { flex-wrap: wrap; gap: 8px; padding: 8px 10px; height: auto; }
+  .dash-tabs { width: 100%; justify-content: flex-start; }
+  .dash-tab { padding: 4px 8px; font-size: 10px; }
   .doc-hero { padding: 40px 20px 30px; }
   .doc-wrapper { padding: 30px 20px 60px; }
   .step-card { grid-template-columns: 1fr; padding: 24px 20px; gap: 16px; }
