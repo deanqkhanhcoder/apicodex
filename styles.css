@@ -113,6 +113,9 @@ dd { margin: 0; font-size: 12px; font-weight: 700; }
 .dash-tab.active { background: #fff; color: var(--navy); border-color: #cbd8e5; box-shadow: 0 1px 3px rgba(16,35,59,.06); }
 .dash-panel { display: none; }
 .dash-panel.active { display: block; animation: fadeIn .2s ease; }
+.dash-link-preview { display: block; position: relative; text-decoration: none; cursor: pointer; }
+.dash-preview-badge { position: absolute; bottom: 18px; right: 18px; padding: 6px 14px; background: rgba(23,54,93,.92); color: #8fd8bc; font-size: 11px; font-weight: 700; border-radius: 2px; backdrop-filter: blur(4px); transition: all .2s; }
+.dash-link-preview:hover .dash-preview-badge { background: var(--navy); color: #fff; }
 
 /* Guide Teaser on Homepage */
 .guide-teaser { background: var(--white); }

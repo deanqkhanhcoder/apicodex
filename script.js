@@ -1,133 +1,138 @@
+// Universal clipboard helper with textarea fallback
+async function copyText(text) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text)
+      return true
+    }
+  } catch {}
+  try {
+    const ta = document.createElement('textarea')
+    ta.value = text
+    ta.style.position = 'fixed'
+    ta.style.left = '-9999px'
+    ta.style.top = '0'
+    document.body.appendChild(ta)
+    ta.focus()
+    ta.select()
+    const ok = document.execCommand('copy')
+    document.body.removeChild(ta)
+    return ok
+  } catch {
+    return false
+  }
+}
+
+// Mobile Menu Toggle
 const header = document.querySelector('.site-header')
 const menuButton = document.querySelector('.menu-button')
 
-menuButton.addEventListener('click', () => {
-  const open = header.classList.toggle('menu-open')
-  menuButton.setAttribute('aria-expanded', String(open))
-  menuButton.setAttribute('aria-label', open ? 'Đóng trình đơn' : 'Mở trình đơn')
-})
-
-document.querySelectorAll('.site-header nav a').forEach((link) => {
-  link.addEventListener('click', () => {
-    header.classList.remove('menu-open')
-    menuButton.setAttribute('aria-expanded', 'false')
+if (menuButton && header) {
+  menuButton.addEventListener('click', () => {
+    const open = header.classList.toggle('menu-open')
+    menuButton.setAttribute('aria-expanded', String(open))
+    menuButton.setAttribute('aria-label', open ? 'Đóng trình đơn' : 'Mở trình đơn')
   })
-})
 
-// Copy guest password
-const copyValBtn = document.querySelector('.copy-value')
-if (copyValBtn) {
-  copyValBtn.addEventListener('click', async (event) => {
-    const button = event.currentTarget
-    const label = button.querySelector('span')
-
-    try {
-      await navigator.clipboard.writeText(button.dataset.copy)
-      label.textContent = 'Đã chép'
-      window.setTimeout(() => { label.textContent = 'Chép' }, 1800)
-    } catch {
-      label.textContent = '0899759653'
-    }
+  document.querySelectorAll('.site-header nav a').forEach((link) => {
+    link.addEventListener('click', () => {
+      header.classList.remove('menu-open')
+      menuButton.setAttribute('aria-expanded', 'false')
+    })
   })
 }
 
-// OS Tabs in Setup Guide Step 2
-const osTabs = document.querySelectorAll('.os-tab')
-const osPanels = document.querySelectorAll('.os-panel')
-
-osTabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    const targetId = tab.getAttribute('aria-controls')
-
-    osTabs.forEach((t) => {
+// Event Delegation for All Tabs & Copy Buttons
+document.addEventListener('click', async (event) => {
+  // 1. Dashboard Tabs (.dash-tab)
+  const dashTab = event.target.closest('.dash-tab')
+  if (dashTab) {
+    const targetId = dashTab.getAttribute('aria-controls')
+    document.querySelectorAll('.dash-tab').forEach((t) => {
       t.classList.remove('active')
       t.setAttribute('aria-selected', 'false')
     })
-    osPanels.forEach((p) => {
+    document.querySelectorAll('.dash-panel').forEach((p) => {
       p.classList.remove('active')
       p.hidden = true
     })
-
-    tab.classList.add('active')
-    tab.setAttribute('aria-selected', 'true')
-
+    dashTab.classList.add('active')
+    dashTab.setAttribute('aria-selected', 'true')
     const targetPanel = document.getElementById(targetId)
     if (targetPanel) {
       targetPanel.hidden = false
       targetPanel.classList.add('active')
     }
-  })
-})
+    return
+  }
 
-// Dashboard View Tabs in #dashboard
-const dashTabs = document.querySelectorAll('.dash-tab')
-const dashPanels = document.querySelectorAll('.dash-panel')
-
-dashTabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    const targetId = tab.getAttribute('aria-controls')
-
-    dashTabs.forEach((t) => {
+  // 2. Setup OS Tabs (.os-tab)
+  const osTab = event.target.closest('.os-tab')
+  if (osTab) {
+    const targetId = osTab.getAttribute('aria-controls')
+    document.querySelectorAll('.os-tab').forEach((t) => {
       t.classList.remove('active')
       t.setAttribute('aria-selected', 'false')
     })
-    dashPanels.forEach((p) => {
+    document.querySelectorAll('.os-panel').forEach((p) => {
       p.classList.remove('active')
       p.hidden = true
     })
-
-    tab.classList.add('active')
-    tab.setAttribute('aria-selected', 'true')
-
+    osTab.classList.add('active')
+    osTab.setAttribute('aria-selected', 'true')
     const targetPanel = document.getElementById(targetId)
     if (targetPanel) {
       targetPanel.hidden = false
       targetPanel.classList.add('active')
     }
-  })
-})
+    return
+  }
 
-// Copy individual snippet
-document.querySelectorAll('.copy-snippet').forEach((btn) => {
-  btn.addEventListener('click', async () => {
-    const code = btn.dataset.code
-    const originalText = btn.textContent
-
-    try {
-      await navigator.clipboard.writeText(code)
-      btn.textContent = 'Đã chép'
-      btn.style.color = 'var(--mint)'
-      window.setTimeout(() => {
-        btn.textContent = originalText
-        btn.style.color = ''
-      }, 1600)
-    } catch {
-      btn.textContent = 'Lỗi'
-      window.setTimeout(() => { btn.textContent = originalText }, 1600)
+  // 3. Guest Password Copy (.copy-value)
+  const copyVal = event.target.closest('.copy-value')
+  if (copyVal) {
+    const label = copyVal.querySelector('span')
+    const text = copyVal.dataset.copy || '0899759653'
+    const success = await copyText(text)
+    if (label) {
+      label.textContent = success ? 'Đã chép' : '0899759653'
+      window.setTimeout(() => { label.textContent = 'Chép' }, 1800)
     }
-  })
-})
+    return
+  }
 
-// Copy full config.toml
-const copyTomlBtn = document.getElementById('copy-toml-btn')
-if (copyTomlBtn) {
-  copyTomlBtn.addEventListener('click', async () => {
+  // 4. Code Snippet Copy (.copy-snippet)
+  const snippetBtn = event.target.closest('.copy-snippet')
+  if (snippetBtn) {
+    const code = snippetBtn.dataset.code || ''
+    const orig = snippetBtn.textContent
+    const success = await copyText(code)
+    snippetBtn.textContent = success ? 'Đã chép' : 'Lỗi'
+    if (success) snippetBtn.style.color = 'var(--mint)'
+    window.setTimeout(() => {
+      snippetBtn.textContent = orig
+      snippetBtn.style.color = ''
+    }, 1600)
+    return
+  }
+
+  // 5. Copy Full config.toml (#copy-toml-btn)
+  const tomlBtn = event.target.closest('#copy-toml-btn')
+  if (tomlBtn) {
     const codeEl = document.getElementById('toml-code-content')
     const text = codeEl ? codeEl.textContent : ''
-
-    try {
-      await navigator.clipboard.writeText(text)
-      const orig = copyTomlBtn.textContent
-      copyTomlBtn.textContent = '✓ Đã sao chép config.toml'
-      copyTomlBtn.style.background = 'var(--mint)'
-      copyTomlBtn.style.color = '#fff'
-      window.setTimeout(() => {
-        copyTomlBtn.textContent = orig
-        copyTomlBtn.style.background = ''
-        copyTomlBtn.style.color = ''
-      }, 2000)
-    } catch {
-      copyTomlBtn.textContent = 'Không sao chép được'
+    const orig = tomlBtn.textContent
+    const success = await copyText(text)
+    tomlBtn.textContent = success ? '✓ Đã sao chép config.toml' : 'Không sao chép được'
+    if (success) {
+      tomlBtn.style.background = 'var(--mint)'
+      tomlBtn.style.color = '#fff'
     }
-  })
-}
+    window.setTimeout(() => {
+      tomlBtn.textContent = orig
+      tomlBtn.style.background = ''
+      tomlBtn.style.color = ''
+    }, 2000)
+    return
+  }
+})
