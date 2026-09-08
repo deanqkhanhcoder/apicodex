@@ -1,0 +1,16 @@
+# OS & Editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Tool artifacts & test snapshots
+.kilo/
+.playwright-mcp/
+*.png
+!assets/*.png
+*.log
+*.tmp
+*.zip
+google-doc-*
+frontend-*-snapshot.md

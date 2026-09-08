@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3o2QNDiqQxpqapQQxuKwNYIWBUk0s6P8V5FA6ATxElM">
+  <meta name="description" content="Hướng dẫn setup Codex config cho người mới: thiết lập API Key, cấu hình file config.toml trên Windows, macOS và Linux.">
+  <link rel="canonical" href="https://apicodex.netlify.app/huong-dan.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://apicodex.netlify.app/huong-dan.html">
+  <meta property="og:title" content="Hướng dẫn setup Codex config cho người mới — API Codex">
+  <meta property="og:description" content="5 bước chuẩn thiết lập API Key, biến môi trường và nạp file config.toml cho ứng dụng Codex trên Windows, macOS và Linux.">
+  <meta property="og:image" content="https://apicodex.netlify.app/assets/document-2.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hướng dẫn setup Codex config cho người mới — API Codex">
+  <meta name="twitter:description" content="5 bước chuẩn thiết lập API Key, biến môi trường và nạp file config.toml cho ứng dụng Codex trên Windows, macOS và Linux.">
+  <meta name="twitter:image" content="https://apicodex.netlify.app/assets/document-2.png">
+  <title>Hướng dẫn setup Codex config cho người mới — API Codex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317365d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia' font-size='34' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Hướng dẫn setup Codex config cho người mới",
+    "description": "5 bước chuẩn thiết lập API Key, biến môi trường và nạp file config.toml cho ứng dụng Codex trên Windows, macOS và Linux.",
+    "url": "https://apicodex.netlify.app/huong-dan.html",
+    "datePublished": "2026-09-08",
+    "author": {
+      "@type": "Organization",
+      "name": "API Codex"
+    }
+  }
+  </script>
+</head>
+<body class="doc-page">
+  <header class="site-header">
+    <a class="brand" href="index.html#top" aria-label="API Codex — về trang chủ">
+      <span class="brand-mark" aria-hidden="true">C<span>/</span></span>
+      <span>API Codex</span>
+    </a>
+    <nav aria-label="Điều hướng chính">
+      <a href="index.html#bang-gia">Bảng giá</a>
+      <a href="index.html#dich-vu">Dịch vụ</a>
+      <a href="index.html#dashboard">Dashboard</a>
+      <a class="nav-active" href="huong-dan.html">Hướng dẫn</a>
+    </nav>
+    <a class="header-action" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Đăng ký qua Zalo</a>
+    <button class="menu-button" type="button" aria-label="Mở trình đơn" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a class="back-link" href="index.html">← Quay lại trang chủ</a>
+        <p class="section-tag">Tài liệu kỹ thuật</p>
+        <h1>HƯỚNG DẪN SETUP CODEX CONFIG CHO NGƯỜI MỚI</h1>
+        <p class="doc-lead">Thiết lập biến môi trường và nạp file <code>config.toml</code> để sử dụng API Key riêng biệt trên ứng dụng Codex. Lịch sử chat và quy trình làm việc trên Codex được giữ nguyên, không bị ảnh hưởng.</p>
+        <div class="doc-meta">
+          <span>Thời gian thiết lập: <strong>~3 phút</strong></span>
+          <span>Nền tảng: <strong>Windows, macOS, Linux</strong></span>
+          <a class="text-link" href="https://docs.google.com/document/d/1rkvNwVLz3mEp2RrfsH9Akq5knTxJyN6_HLEKS-k7dc0" target="_blank" rel="noopener">Xem Google Docs gốc ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="doc-wrapper">
+      <aside class="doc-sidebar" aria-label="Mục lục bài hướng dẫn">
+        <div class="sidebar-sticky">
+          <p class="sidebar-title">Nội dung hướng dẫn</p>
+          <ul class="sidebar-nav">
+            <li><a href="#luu-y">Lưu ý quan trọng</a></li>
+            <li><a href="#buoc-1">Bước 1: Đăng nhập Codex</a></li>
+            <li><a href="#buoc-2">Bước 2: Thiết lập API Key</a></li>
+            <li><a href="#buoc-3">Bước 3: Mở file config</a></li>
+            <li><a href="#buoc-4">Bước 4: Cập nhật nội dung config</a></li>
+            <li><a href="#buoc-5">Bước 5: Khởi động lại và kiểm tra</a></li>
+            <li><a href="#troubleshooting">Xử lý sự cố (Troubleshooting)</a></li>
+          </ul>
+          <div class="sidebar-support">
+            <p>Cần hỗ trợ trực tiếp?</p>
+            <a class="button button-primary button-small" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a>
+          </div>
+        </div>
+      </aside>
+
+      <section class="doc-content">
+        <div class="setup-notice" id="luu-y" role="note">
+          <div class="notice-badge">LƯU Ý QUAN TRỌNG</div>
+          <ul>
+            <li><strong>Không gửi hoặc chia sẻ API key</strong> cho người khác. API key giống như mật khẩu.</li>
+            <li>Sau khi cấu hình thành công, yêu cầu sử dụng model sẽ <strong>trừ token từ API key được cấp</strong>, không dùng hạn mức Codex của tài khoản cá nhân.</li>
+            <li><strong>Lịch sử chat và quy trình làm việc</strong> trên Codex được giữ nguyên, không bị ảnh hưởng.</li>
+          </ul>
+        </div>
+
+        <div class="step-list">
+          <article class="step-card" id="buoc-1">
+            <div class="step-num" aria-hidden="true">01</div>
+            <div class="step-content">
+              <h3>BƯỚC 1: ĐĂNG NHẬP CODEX</h3>
+              <p>Mở ứng dụng Codex và đăng nhập bằng tài khoản OpenAI/Codex cá nhân của bạn.</p>
+              <div class="step-warning">
+                <strong>Lưu ý:</strong> Không đăng nhập bằng tài khoản OpenAI EDU. Nếu đang sử dụng tài khoản EDU, hãy đăng xuất và chuyển sang tài khoản khác trước khi tiếp tục.
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card" id="buoc-2">
+            <div class="step-num" aria-hidden="true">02</div>
+            <div class="step-content">
+              <h3>BƯỚC 2: THIẾT LẬP API KEY</h3>
+              <p>Chọn môi trường bạn đang sử dụng để lưu biến môi trường <code>CODEX_LB_API_KEY</code>:</p>
+              
+              <div class="os-tabs" role="tablist" aria-label="Chọn hệ điều hành thiết lập API Key">
+                <button type="button" class="os-tab active" role="tab" id="tab-wincmd" aria-selected="true" aria-controls="panel-wincmd" data-os="wincmd">1. Windows (CMD)</button>
+                <button type="button" class="os-tab" role="tab" id="tab-winps" aria-selected="false" aria-controls="panel-winps" data-os="winps">2. Windows (PowerShell)</button>
+                <button type="button" class="os-tab" role="tab" id="tab-macos" aria-selected="false" aria-controls="panel-macos" data-os="macos">3. macOS</button>
+                <button type="button" class="os-tab" role="tab" id="tab-linux" aria-selected="false" aria-controls="panel-linux" data-os="linux">4. Linux</button>
+              </div>
+
+              <div class="os-panel active" id="panel-wincmd" role="tabpanel" aria-labelledby="tab-wincmd">
+                <p>Mở Command Prompt (CMD) và chạy lệnh sau để lưu API key vĩnh viễn:</p>
+                <div class="code-line">
+                  <code>setx CODEX_LB_API_KEY &quot;sk-xxxxxxxxxxxxxxxx&quot;</code>
+                  <button type="button" class="copy-snippet" data-code="setx CODEX_LB_API_KEY &quot;sk-xxxxxxxxxxxxxxxx&quot;">Chép</button>
+                </div>
+                <p>Sau đó, đóng CMD hiện tại, mở cửa sổ CMD mới và kiểm tra lại:</p>
+                <div class="code-line">
+                  <code>echo %CODEX_LB_API_KEY%</code>
+                  <button type="button" class="copy-snippet" data-code="echo %CODEX_LB_API_KEY%">Chép</button>
+                </div>
+                <p class="feedback-hint">Nếu màn hình hiển thị API key là đã thiết lập thành công.</p>
+              </div>
+
+              <div class="os-panel" id="panel-winps" role="tabpanel" aria-labelledby="tab-winps" hidden>
+                <p>Mở PowerShell và chạy lệnh sau:</p>
+                <div class="code-line">
+                  <code>[Environment]::SetEnvironmentVariable(&quot;CODEX_LB_API_KEY&quot;, &quot;DÁN_API_KEY_VÀO_ĐÂY&quot;, &quot;User&quot;)</code>
+                  <button type="button" class="copy-snippet" data-code="[Environment]::SetEnvironmentVariable(&quot;CODEX_LB_API_KEY&quot;, &quot;DÁN_API_KEY_VÀO_ĐÂY&quot;, &quot;User&quot;)">Chép</button>
+                </div>
+                <p>Đóng PowerShell, mở lại cửa sổ mới và kiểm tra:</p>
+                <div class="code-line">
+                  <code>$env:CODEX_LB_API_KEY</code>
+                  <button type="button" class="copy-snippet" data-code="$env:CODEX_LB_API_KEY">Chép</button>
+                </div>
+                <p class="feedback-hint">Nếu màn hình hiện API key là đã thành công.</p>
+              </div>
+
+              <div class="os-panel" id="panel-macos" role="tabpanel" aria-labelledby="tab-macos" hidden>
+                <p>Mở Terminal và thực hiện lần lượt các bước:</p>
+                <div class="code-line code-multi">
+                  <code>echo &#39;export CODEX_LB_API_KEY=&quot;DÁN_API_KEY_VÀO_ĐÂY&quot;&#39; &gt;&gt; ~/.zshrc
+source ~/.zshrc
+echo $CODEX_LB_API_KEY</code>
+                  <button type="button" class="copy-snippet" data-code="echo &#39;export CODEX_LB_API_KEY=&quot;DÁN_API_KEY_VÀO_ĐÂY&quot;&#39; &gt;&gt; ~/.zshrc&#10;source ~/.zshrc&#10;echo $CODEX_LB_API_KEY">Chép</button>
+                </div>
+                <p class="feedback-hint">Nếu Terminal hiển thị API key là thành công.</p>
+              </div>
+
+              <div class="os-panel" id="panel-linux" role="tabpanel" aria-labelledby="tab-linux" hidden>
+                <p>Kiểm tra shell đang dùng bằng lệnh <code>echo $SHELL</code>:</p>
+                <p class="sub-lead">Nếu là Bash (<code>/bin/bash</code>), chạy:</p>
+                <div class="code-line code-multi">
+                  <code>echo &#39;export CODEX_LB_API_KEY=&quot;DÁN_API_KEY_VÀO_ĐÂY&quot;&#39; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+echo $CODEX_LB_API_KEY</code>
+                  <button type="button" class="copy-snippet" data-code="echo &#39;export CODEX_LB_API_KEY=&quot;DÁN_API_KEY_VÀO_ĐÂY&quot;&#39; &gt;&gt; ~/.bashrc&#10;source ~/.bashrc&#10;echo $CODEX_LB_API_KEY">Chép</button>
+                </div>
+                <p class="sub-lead">Nếu là Zsh (<code>/bin/zsh</code>), chạy:</p>
+                <div class="code-line code-multi">
+                  <code>echo &#39;export CODEX_LB_API_KEY=&quot;DÁN_API_KEY_VÀO_ĐÂY&quot;&#39; &gt;&gt; ~/.zshrc
+source ~/.zshrc
+echo $CODEX_LB_API_KEY</code>
+                  <button type="button" class="copy-snippet" data-code="echo &#39;export CODEX_LB_API_KEY=&quot;DÁN_API_KEY_VÀO_ĐÂY&quot;&#39; &gt;&gt; ~/.zshrc&#10;source ~/.zshrc&#10;echo $CODEX_LB_API_KEY">Chép</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card" id="buoc-3">
+            <div class="step-num" aria-hidden="true">03</div>
+            <div class="step-content">
+              <h3>BƯỚC 3: MỞ FILE CONFIG</h3>
+              <div class="substeps-columns">
+                <div class="substep-box">
+                  <h4>Windows</h4>
+                  <p>Mở CMD và chạy lệnh sau (nếu chưa có thư mục <code>.codex</code>, hãy tạo thư mục trước):</p>
+                  <div class="code-line">
+                    <code>notepad %USERPROFILE%\.codex\config.toml</code>
+                    <button type="button" class="copy-snippet" data-code="notepad %USERPROFILE%\.codex\config.toml">Chép</button>
+                  </div>
+                </div>
+                <div class="substep-box">
+                  <h4>macOS</h4>
+                  <p>Mở Terminal và chọn một trong hai cách:</p>
+                  <p class="mini-lead">Dùng TextEdit:</p>
+                  <div class="code-line">
+                    <code>open -e ~/.codex/config.toml</code>
+                    <button type="button" class="copy-snippet" data-code="open -e ~/.codex/config.toml">Chép</button>
+                  </div>
+                  <p class="mini-lead">Hoặc dùng Terminal:</p>
+                  <div class="code-line">
+                    <code>nano ~/.codex/config.toml</code>
+                    <button type="button" class="copy-snippet" data-code="nano ~/.codex/config.toml">Chép</button>
+                  </div>
+                </div>
+                <div class="substep-box">
+                  <h4>Linux</h4>
+                  <p>Tạo thư mục nếu chưa có và mở file config bằng lệnh:</p>
+                  <div class="code-line">
+                    <code>mkdir -p ~/.codex &amp;&amp; nano ~/.codex/config.toml</code>
+                    <button type="button" class="copy-snippet" data-code="mkdir -p ~/.codex &amp;&amp; nano ~/.codex/config.toml">Chép</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card" id="buoc-4">
+            <div class="step-num" aria-hidden="true">04</div>
+            <div class="step-content">
+              <h3>BƯỚC 4: CẬP NHẬT NỘI DUNG CONFIG</h3>
+              <p>Xóa toàn bộ nội dung cũ trong file <code>config.toml</code> và dán đoạn cấu hình sau vào, sau đó lưu lại:</p>
+              
+              <div class="config-layout">
+                <div class="toml-viewer">
+                  <div class="toml-header">
+                    <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <strong>config.toml</strong>
+                    <button type="button" class="button-copy-all" id="copy-toml-btn">Sao chép toàn bộ config.toml</button>
+                  </div>
+                  <pre class="toml-code" id="toml-code-content"><code><span class="tok-comment"># ==================================================</span>
+<span class="tok-comment"># Model</span>
+<span class="tok-comment"># ==================================================</span>
+
+<span class="tok-key">model</span> = <span class="tok-str">&quot;gpt-6-astra&quot;</span>
+<span class="tok-key">model_provider</span> = <span class="tok-str">&quot;codex-lb&quot;</span>
+
+<span class="tok-key">sandbox_mode</span> = <span class="tok-str">&quot;workspace-write&quot;</span>
+<span class="tok-key">approval_policy</span> = <span class="tok-str">&quot;on-request&quot;</span>
+
+<span class="tok-key">model_reasoning_effort</span> = <span class="tok-str">&quot;ultra&quot;</span>
+<span class="tok-key">personality</span> = <span class="tok-str">&quot;pragmatic&quot;</span>
+<span class="tok-key">service_tier</span> = <span class="tok-str">&quot;priority&quot;</span>
+
+<span class="tok-key">approvals_reviewer</span> = <span class="tok-str">&quot;user&quot;</span>
+
+[<span class="tok-section">desktop</span>]
+<span class="tok-key">followUpQueueMode</span> = <span class="tok-str">&quot;queue&quot;</span>
+<span class="tok-key">conversationDetailMode</span> = <span class="tok-str">&quot;STEPS_COMMANDS&quot;</span>
+
+<span class="tok-key">enabled-reasoning-efforts</span> = [
+   <span class="tok-str">&quot;low&quot;</span>,
+   <span class="tok-str">&quot;medium&quot;</span>,
+   <span class="tok-str">&quot;high&quot;</span>,
+   <span class="tok-str">&quot;xhigh&quot;</span>,
+   <span class="tok-str">&quot;ultra&quot;</span>,
+   <span class="tok-str">&quot;max&quot;</span>
+]
+
+<span class="tok-key">show-context-window-usage</span> = <span class="tok-bool">true</span>
+
+
+<span class="tok-comment"># ==================================================</span>
+<span class="tok-comment"># Windows</span>
+<span class="tok-comment"># ==================================================</span>
+
+[<span class="tok-section">windows</span>]
+<span class="tok-key">sandbox</span> = <span class="tok-str">&quot;elevated&quot;</span>
+
+
+<span class="tok-comment"># ==================================================</span>
+<span class="tok-comment"># Model Provider</span>
+<span class="tok-comment"># ==================================================</span>
+
+[<span class="tok-section">model_providers.codex-lb</span>]
+<span class="tok-key">name</span> = <span class="tok-str">&quot;openai&quot;</span>
+<span class="tok-key">base_url</span> = <span class="tok-str">&quot;http://apicodex.cloud-ip.cc:2455/backend-api/codex&quot;</span>
+<span class="tok-key">wire_api</span> = <span class="tok-str">&quot;responses&quot;</span>
+<span class="tok-key">env_key</span> = <span class="tok-str">&quot;CODEX_LB_API_KEY&quot;</span>
+<span class="tok-key">supports_websockets</span> = <span class="tok-bool">true</span>
+<span class="tok-key">requires_openai_auth</span> = <span class="tok-bool">true</span>
+
+
+<span class="tok-comment"># ==================================================</span>
+<span class="tok-comment"># Subagent</span>
+<span class="tok-comment"># ==================================================</span>
+
+[<span class="tok-section">agents.subagent</span>]
+<span class="tok-key">model</span> = <span class="tok-str">&quot;gpt-5.6-terra&quot;</span>
+
+
+<span class="tok-comment"># ==================================================</span>
+<span class="tok-comment"># Plugins</span>
+<span class="tok-comment"># ==================================================</span>
+
+[<span class="tok-section">plugins.&quot;browser@openai-bundled&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;chrome@openai-bundled&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;visualize@openai-bundled&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;codex-app-tools@openai-bundled&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;documents@openai-primary-runtime&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;pdf@openai-primary-runtime&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;spreadsheets@openai-primary-runtime&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;presentations@openai-primary-runtime&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;template-creator@openai-primary-runtime&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+[<span class="tok-section">plugins.&quot;computer-use@openai-bundled&quot;</span>]
+<span class="tok-key">enabled</span> = <span class="tok-bool">true</span>
+
+
+<span class="tok-comment"># ==================================================</span>
+<span class="tok-comment"># Features</span>
+<span class="tok-comment"># ==================================================</span>
+
+[<span class="tok-section">features</span>]
+<span class="tok-key">js_repl</span> = <span class="tok-bool">false</span>
+<span class="tok-key">memories</span> = <span class="tok-bool">false</span>
+<span class="tok-key">chronicle</span> = <span class="tok-bool">false</span>
+
+[<span class="tok-section">memories</span>]
+<span class="tok-key">generate_memories</span> = <span class="tok-bool">false</span>
+<span class="tok-key">use_memories</span> = <span class="tok-bool">false</span></code></pre>
+                </div>
+
+                <figure class="toml-figure">
+                  <div class="figure-frame">
+                    <img src="assets/document-2.png?v=2" alt="Giao diện đối chiếu cấu hình config.toml sau khi lưu thực tế" width="1444" height="1017">
+                  </div>
+                  <figcaption>Đối chiếu cấu hình thực tế khi mở và lưu file config.toml</figcaption>
+                </figure>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card" id="buoc-5">
+            <div class="step-num" aria-hidden="true">05</div>
+            <div class="step-content">
+              <h3>BƯỚC 5: KHỞI ĐỘNG LẠI VÀ KIỂM TRA</h3>
+              <ol class="step-checklist">
+                <li>
+                  <span class="check-num">1</span>
+                  <span>Đóng hoàn toàn ứng dụng Codex.</span>
+                </li>
+                <li>
+                  <span class="check-num">2</span>
+                  <span>Mở lại ứng dụng Codex và bắt đầu sử dụng bình thường.</span>
+                </li>
+              </ol>
+            </div>
+          </article>
+        </div>
+
+        <div class="troubleshooting-card" id="troubleshooting">
+          <div class="trouble-head">
+            <span class="trouble-badge">Hỗ trợ kỹ thuật</span>
+            <h3>XỬ LÝ SỰ CỐ (TROUBLESHOOTING)</h3>
+          </div>
+          <div class="trouble-body">
+            <h4>Lỗi không nhận API Key</h4>
+            <div class="trouble-grid">
+              <div class="trouble-item">
+                <strong>Windows</strong>
+                <p>Cần đóng Terminal cũ và mở Terminal mới để kiểm tra lại bằng lệnh <code>echo %CODEX_LB_API_KEY%</code>. Nếu chưa nhận, hãy chạy lại lệnh <code>setx</code> và khởi động lại Terminal.</p>
+              </div>
+              <div class="trouble-item">
+                <strong>macOS / Linux</strong>
+                <p>Chạy lệnh <code>source ~/.zshrc</code> (hoặc <code>source ~/.bashrc</code>). Mở file shell tương ứng để kiểm tra chắc chắn có dòng <code>export CODEX_LB_API_KEY=&quot;API_KEY_CỦA_BẠN&quot;</code>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-cta">
+          <div>
+            <p class="section-tag">Cần tư vấn thêm?</p>
+            <h3>Chưa có API Key hoặc cần nạp thêm token?</h3>
+            <p>Liên hệ hỗ trợ nhanh qua Zalo hoặc tham gia nhóm cộng đồng.</p>
+          </div>
+          <div class="doc-cta-buttons">
+            <a class="button button-primary" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a>
+            <a class="button button-outline" href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">Nhóm cộng đồng</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <a class="brand" href="index.html#top">
+      <span class="brand-mark" aria-hidden="true">C<span>/</span></span>
+      <span>API Codex</span>
+    </a>
+    <p>Giải pháp tối ưu cho trải nghiệm AI.</p>
+    <span>© 2026 API Codex</span>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
