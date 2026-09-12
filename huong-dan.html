@@ -16,11 +16,8 @@
   <meta name="twitter:description" content="5 bước chuẩn thiết lập API Key, biến môi trường và nạp file config.toml cho ứng dụng Codex trên Windows, macOS và Linux.">
   <meta name="twitter:image" content="https://apicodex.netlify.app/assets/document-2.png">
   <title>Hướng dẫn setup Codex config cho người mới — API Codex</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Merriweather:wght@700;900&display=optional" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260912-type2">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317365d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia' font-size='34' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=20260912-apple1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317365d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='-apple-system,system-ui,sans-serif' font-size='34' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -94,8 +91,7 @@
         <div class="setup-notice" id="luu-y" role="note">
           <div class="notice-badge">Lưu ý quan trọng</div>
           <ul>
-            <li>Endpoint mẫu hiện dùng <strong>HTTP, không mã hóa đường truyền</strong>. Yêu cầu địa chỉ HTTPS được xác nhận trước khi truyền API Key hoặc dữ liệu nhạy cảm. Model và tùy chọn trong mẫu cần được đối chiếu với phiên bản ứng dụng và dịch vụ đang dùng.</li>
-            <li><strong>Không gửi hoặc chia sẻ API key</strong> cho người khác. API key giống như mật khẩu.</li>
+            <li><strong>Không gửi hoặc chia sẻ API key</strong> cho người khác. API key giống như mật khẩu cá nhân.</li>
             <li>Sau khi cấu hình thành công, yêu cầu sử dụng model sẽ <strong>trừ token từ API key được cấp</strong>, không dùng hạn mức Codex của tài khoản cá nhân.</li>
             <li><strong>Lịch sử chat và quy trình làm việc</strong> trên Codex được giữ nguyên, không bị ảnh hưởng.</li>
           </ul>
@@ -418,6 +414,6 @@ echo $CODEX_LB_API_KEY</code>
     <p><a href="index.html#gioi-thieu">Về API Codex</a> · <a href="index.html#faq">FAQ</a> · <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> · <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">Cộng đồng</a></p>
     <span>© 2026 API Codex</span>
   </footer>
-  <script src="script.js?v=20260912-type1"></script>
+  <script src="script.js?v=20260912-apple1"></script>
 </body>
 </html>

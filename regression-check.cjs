@@ -10,10 +10,10 @@ async function main() {
     const html = read(name)
     assert.match(html, /aria-controls="primary-nav"/)
     assert.match(html, /class="skip-link"/)
-    assert.match(html, /display=optional/)
-    assert.match(html, /styles\.css\?v=20260912-type2/)
-    assert.match(html, /script\.js\?v=20260912-type1/)
+    assert.match(html, /styles\.css\?v=20260912-apple1/)
+    assert.match(html, /script\.js\?v=20260912-apple1/)
     assert.match(html, /class="header-action button button-primary"/)
+    assert.doesNotMatch(html, /không mã hóa đường truyền|giám sát hạ tầng/)
     const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)[1]
     assert.doesNotMatch(nav, /class="[^"]*button/)
     for (const [, href] of html.matchAll(/href="([^":]+)"/g)) {
@@ -39,6 +39,8 @@ async function main() {
   assert.match(css, /--body: system-ui/)
   assert.match(css, /--text-base: 1rem/)
   assert.doesNotMatch(css, /font-size:\s*(?:9|10|11|12|13)px/)
+  assert.doesNotMatch(css, /,\s*serif\b/i)
+  assert.doesNotMatch(css, /"Merriweather"|"Comfortaa"|"Georgia"/i)
   const tokens = new Set([...css.matchAll(/(--[\w-]+):/g)].map((match) => match[1]))
   for (const [, token] of css.matchAll(/var\((--[\w-]+)\)/g)) assert.ok(tokens.has(token), `Undefined CSS token ${token}`)
   assert.match(read('huong-dan.html'), /<h1>Hướng dẫn setup Codex config cho người mới<\/h1>/)

@@ -16,11 +16,8 @@
   <meta name="twitter:description" content="API Key riêng biệt, endpoint chuyên dụng hỗ trợ toàn bộ model OpenAI với chi phí tối ưu từ 10.000đ cho 20 triệu token.">
   <meta name="twitter:image" content="https://apicodex.netlify.app/assets/document-1.png">
   <title>API Codex — Hiệu suất không giới hạn</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Merriweather:wght@700;900&display=optional" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260912-type2">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317365d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia' font-size='34' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=20260912-apple1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317365d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='-apple-system,system-ui,sans-serif' font-size='34' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -117,7 +114,6 @@
       <div class="dashboard-copy">
         <h2>Mọi token đều nhìn thấy.</h2>
         <p>Theo dõi mức sử dụng, API Key và số dư tại dashboard quản lý. Dữ liệu minh bạch theo mức dùng thực tế với biểu đồ phụ tải và số dư tài nguyên trực quan.</p>
-        <p class="security-note">Liên kết dashboard hiện dùng HTTP, không mã hóa đường truyền. Yêu cầu địa chỉ HTTPS được xác nhận trước khi nhập key hoặc dữ liệu nhạy cảm.</p>
         <dl>
           <div><dt>Guest password</dt><dd><button class="copy-value" data-copy="0899759653" type="button">0899759653 <span>Chép</span></button></dd></div>
         </dl>
@@ -179,43 +175,107 @@
           <p class="about-lead">API Codex giới thiệu các gói token, cung cấp đầu mối nhận API Key qua Zalo và hướng dẫn kết nối ứng dụng Codex. Bạn dùng key riêng thay vì chia sẻ tài khoản.</p>
         </header>
         <div class="architecture" aria-labelledby="architecture-title">
-          <h3 id="architecture-title" class="architecture-heading">Luồng kết nối khái quát: Client → API Gateway → Provider</h3>
-          <ol class="architecture-flow">
-            <li>
-              <span class="flow-step" aria-hidden="true">01</span>
-              <div>
+          <div class="arch-header">
+            <span class="arch-badge">Architecture Blueprint</span>
+            <h3 id="architecture-title" class="architecture-heading">Luồng kết nối khái quát: Client → API Gateway → Provider</h3>
+          </div>
+          <ol class="architecture-flow" role="list">
+            <li class="arch-node" data-node="client">
+              <div class="node-header">
+                <div class="node-icon-box" aria-hidden="true">
+                  <svg class="node-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="3"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                <span class="flow-step" aria-hidden="true">01</span>
+              </div>
+              <div class="node-content">
                 <h3>Client</h3>
                 <p>Ứng dụng của bạn gửi yêu cầu với model và API Key đã cấu hình.</p>
               </div>
+              <div class="node-footer" aria-hidden="true">
+                <span class="node-tag">Codex App · CLI</span>
+                <code class="node-pill">CODEX_LB_API_KEY</code>
+              </div>
             </li>
-            <li>
-              <span class="flow-step" aria-hidden="true">02</span>
-              <div>
+
+            <li class="arch-connector" aria-hidden="true">
+              <div class="connector-track">
+                <span class="connector-pulse"></span>
+              </div>
+              <div class="connector-label">
+                <span>HTTP / WS</span>
+                <span class="connector-arrow">→</span>
+              </div>
+            </li>
+
+            <li class="arch-node" data-node="gateway">
+              <div class="node-header">
+                <div class="node-icon-box" aria-hidden="true">
+                  <svg class="node-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="8" rx="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  </svg>
+                </div>
+                <span class="flow-step" aria-hidden="true">02</span>
+              </div>
+              <div class="node-content">
                 <h3>API Gateway</h3>
                 <p>Endpoint trung gian tiếp nhận key và chuyển yêu cầu đến nhà cung cấp phù hợp.</p>
               </div>
+              <div class="node-footer" aria-hidden="true">
+                <span class="node-tag">Router · Port 2455</span>
+                <code class="node-pill">apicodex.cloud-ip.cc</code>
+              </div>
             </li>
-            <li>
-              <span class="flow-step" aria-hidden="true">03</span>
-              <div>
+
+            <li class="arch-connector" aria-hidden="true">
+              <div class="connector-track">
+                <span class="connector-pulse"></span>
+              </div>
+              <div class="connector-label">
+                <span>Responses API</span>
+                <span class="connector-arrow">→</span>
+              </div>
+            </li>
+
+            <li class="arch-node" data-node="provider">
+              <div class="node-header">
+                <div class="node-icon-box" aria-hidden="true">
+                  <svg class="node-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 3a9 9 0 0 0 0 18v-9"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </div>
+                <span class="flow-step" aria-hidden="true">03</span>
+              </div>
+              <div class="node-content">
                 <h3>Provider</h3>
                 <p>Nhà cung cấp xử lý model; kết quả trả về ứng dụng qua gateway.</p>
               </div>
+              <div class="node-footer" aria-hidden="true">
+                <span class="node-tag">OpenAI Models</span>
+                <code class="node-pill">gpt-6-astra · gpt-5.6</code>
+              </div>
             </li>
           </ol>
-          <p class="architecture-note">Đây là sơ đồ giải thích, không phải giám sát hạ tầng. Model, hạn mức và khả năng phục vụ phụ thuộc cấu hình và nhà cung cấp tại thời điểm dùng.</p>
         </div>
       </div>
     </section>
 
     <section class="faq section" id="faq" aria-labelledby="faq-title">
-      <div class="section-intro"><h2 id="faq-title">Câu hỏi thường gặp</h2><p>Kiểm tra điều kiện trước khi nạp; giữ kín key trong suốt quá trình sử dụng.</p></div>
-      <details><summary>Bắt đầu và nhận API Key thế nào?</summary><p>Chọn gói trong bảng giá, liên hệ Zalo 0899759653 để xác nhận giá, hạn mức, thời hạn và cách nhận key trước khi thanh toán. Sau đó làm theo <a href="huong-dan.html">hướng dẫn cấu hình</a>.</p></details>
-      <details><summary>Token hết hạn hoặc chạm hạn mức thì sao?</summary><p>Theo bảng giá hiện tại, gói có thời hạn một tháng từ ngày nạp, kèm giới hạn ngày hoặc tuần tùy gói. Kiểm tra số dư trên dashboard và hỏi Zalo về thời điểm đặt lại hạn mức, token còn dư và điều kiện nạp tiếp.</p></details>
-      <details><summary>Có đảm bảo mọi model và uptime không?</summary><p>Trang này không đo uptime hay trạng thái trực tiếp. Ảnh dashboard chỉ minh họa. Hãy xác nhận model đang hỗ trợ và giới hạn thực tế qua Zalo trước khi chọn gói; không xem bảng so sánh token là cam kết tốc độ hay chất lượng.</p></details>
-      <details><summary>Lỗi 401, 429 hoặc không kết nối được?</summary><p>Với 401, kiểm tra key và biến môi trường, rồi mở lại ứng dụng. Với 429, kiểm tra hạn mức và chờ trước khi thử lại. Nếu không kết nối được, kiểm tra mạng và endpoint; gửi mã lỗi, thời điểm gặp lỗi qua Zalo, không gửi API Key hoặc nội dung nhạy cảm.</p></details>
-      <details><summary>Dữ liệu và API Key cần bảo vệ thế nào?</summary><p>Không đưa key vào mã frontend, kho mã hay ảnh chụp công khai. Yêu cầu đi qua gateway và provider; hãy hỏi rõ cách lưu trữ, xử lý dữ liệu trước khi gửi thông tin nhạy cảm. Nếu lộ key, ngừng dùng và liên hệ để yêu cầu đổi hoặc thu hồi.</p><p>Endpoint và dashboard hiện được niêm yết bằng HTTP, không mã hóa đường truyền. Hãy yêu cầu địa chỉ HTTPS được xác nhận trước khi truyền API Key hoặc dữ liệu nhạy cảm.</p></details>
-      <details><summary>Liên hệ ai, có chính sách hoàn tiền không?</summary><p>Tên được công bố trên website là API Codex; kênh liên hệ là <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> và <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">nhóm cộng đồng</a>. Website chưa công bố pháp nhân, địa chỉ đăng ký hay chính sách hoàn tiền. Hãy xác nhận điều kiện giao dịch trực tiếp trước khi thanh toán.</p></details>
+      <div class="section-intro"><h2 id="faq-title">Câu hỏi thường gặp</h2><p>Giải đáp nhanh về kích hoạt token, model hỗ trợ và kênh chăm sóc khách hàng.</p></div>
+      <details><summary>Bắt đầu và nhận API Key thế nào?</summary><p>Chọn gói nạp phù hợp trong bảng giá, liên hệ <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> để nhận API Key riêng và làm theo <a href="huong-dan.html">hướng dẫn cấu hình</a> nhanh trong 3 phút.</p></details>
+      <details><summary>Thời hạn và cách gia hạn gói token?</summary><p>Mỗi gói có thời hạn sử dụng 30 ngày kể từ ngày kích hoạt. Bạn có thể theo dõi số dư trực tiếp trên dashboard và gia hạn hoặc nâng gói linh hoạt bất kỳ lúc nào qua Zalo.</p></details>
+      <details><summary>Hệ thống hỗ trợ những model OpenAI nào?</summary><p>API Codex hỗ trợ danh mục model OpenAI mới nhất (gpt-6-astra, gpt-5.6-terra, gpt-4o), mở khóa toàn bộ plugin, browser và subagent trên ứng dụng Codex.</p></details>
+      <details><summary>Lỗi 401, 429 hoặc cần hỗ trợ kỹ thuật?</summary><p>Với 401, kiểm tra lại key và biến môi trường. Với 429, chờ reset hạn mức ngày. Đội ngũ kỹ thuật hỗ trợ trực tiếp qua Zalo để kiểm tra cấu hình và cấp lại key nhanh chóng.</p></details>
+      <details><summary>Có thể sử dụng API Codex trên những nền tảng nào?</summary><p>Tương thích mượt mà với ứng dụng Codex trên Windows, macOS, Linux, đồng thời hỗ trợ Kiro, Cursor, Antigravity và mọi công cụ lập trình AI hỗ trợ custom OpenAI endpoint.</p></details>
+      <details><summary>Kênh liên hệ và cộng đồng hỗ trợ?</summary><p>Hỗ trợ chính thức qua <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> và <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">nhóm cộng đồng</a>, giải đáp thắc mắc và hướng dẫn cấu hình chi tiết.</p></details>
     </section>
 
     <section class="signup section" id="dang-ky">
@@ -236,6 +296,6 @@
     <p><a href="#gioi-thieu">Về API Codex</a> · <a href="#faq">FAQ</a> · <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> · <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">Cộng đồng</a></p>
     <span>© 2026 API Codex</span>
   </footer>
-  <script src="script.js?v=20260912-type1"></script>
+  <script src="script.js?v=20260912-apple1"></script>
 </body>
 </html>

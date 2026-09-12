@@ -138,3 +138,30 @@ document.querySelectorAll('img[loading="lazy"]').forEach((image) => {
   image.addEventListener('error', update)
   update()
 })
+
+if (typeof IntersectionObserver !== 'undefined') {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible')
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' })
+
+  document.querySelectorAll('.hero, .section-intro, .hero-meter, .price-table-wrap, .service-list article, .dashboard-visual, .arch-node, .arch-connector, .faq details, .step-card, .toml-viewer, .figure-frame').forEach((el) => {
+    el.classList.add('reveal-item')
+    observer.observe(el)
+  })
+}
+
+document.querySelectorAll('.arch-node').forEach((node) => {
+  node.addEventListener('mouseenter', () => {
+    node.closest('.architecture-flow')?.classList.add('is-hovering')
+    node.classList.add('is-active')
+  })
+  node.addEventListener('mouseleave', () => {
+    node.closest('.architecture-flow')?.classList.remove('is-hovering')
+    node.classList.remove('is-active')
+  })
+})
