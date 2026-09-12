@@ -11,7 +11,7 @@ async function main() {
     assert.match(html, /aria-controls="primary-nav"/)
     assert.match(html, /class="skip-link"/)
     assert.match(html, /display=optional/)
-    assert.match(html, /styles\.css\?v=20260912-type1/)
+    assert.match(html, /styles\.css\?v=20260912-type2/)
     assert.match(html, /script\.js\?v=20260912-type1/)
     assert.match(html, /class="header-action button button-primary"/)
     const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)[1]

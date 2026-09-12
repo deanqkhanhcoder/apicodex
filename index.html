@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Merriweather:wght@700;900&display=optional" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260912-type1">
+  <link rel="stylesheet" href="styles.css?v=20260912-type2">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317365d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia' font-size='34' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E">
   <script type="application/ld+json">
   {
@@ -120,7 +120,6 @@
         <p class="security-note">Liên kết dashboard hiện dùng HTTP, không mã hóa đường truyền. Yêu cầu địa chỉ HTTPS được xác nhận trước khi nhập key hoặc dữ liệu nhạy cảm.</p>
         <dl>
           <div><dt>Guest password</dt><dd><button class="copy-value" data-copy="0899759653" type="button">0899759653 <span>Chép</span></button></dd></div>
-          <div><dt>Dữ liệu hiển thị</dt><dd>Ảnh minh họa, không phải trạng thái trực tiếp</dd></div>
         </dl>
         <div class="dashboard-actions">
           <a class="button button-light" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener">Truy cập dashboard</a>
@@ -173,19 +172,40 @@
     </section>
 
     <section class="about section" id="gioi-thieu" aria-labelledby="about-title">
-      <div class="section-intro">
-        <h2 id="about-title">Về API Codex</h2>
-        <p>API Codex giới thiệu các gói token, cung cấp đầu mối nhận API Key qua Zalo và hướng dẫn kết nối ứng dụng Codex. Bạn dùng key riêng thay vì chia sẻ tài khoản.</p>
+      <div class="about-container">
+        <header class="about-intro">
+          <p class="section-tag">Kiến trúc &amp; Vận hành</p>
+          <h2 id="about-title">Về API Codex</h2>
+          <p class="about-lead">API Codex giới thiệu các gói token, cung cấp đầu mối nhận API Key qua Zalo và hướng dẫn kết nối ứng dụng Codex. Bạn dùng key riêng thay vì chia sẻ tài khoản.</p>
+        </header>
+        <div class="architecture" aria-labelledby="architecture-title">
+          <h3 id="architecture-title" class="architecture-heading">Luồng kết nối khái quát: Client → API Gateway → Provider</h3>
+          <ol class="architecture-flow">
+            <li>
+              <span class="flow-step" aria-hidden="true">01</span>
+              <div>
+                <h3>Client</h3>
+                <p>Ứng dụng của bạn gửi yêu cầu với model và API Key đã cấu hình.</p>
+              </div>
+            </li>
+            <li>
+              <span class="flow-step" aria-hidden="true">02</span>
+              <div>
+                <h3>API Gateway</h3>
+                <p>Endpoint trung gian tiếp nhận key và chuyển yêu cầu đến nhà cung cấp phù hợp.</p>
+              </div>
+            </li>
+            <li>
+              <span class="flow-step" aria-hidden="true">03</span>
+              <div>
+                <h3>Provider</h3>
+                <p>Nhà cung cấp xử lý model; kết quả trả về ứng dụng qua gateway.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="architecture-note">Đây là sơ đồ giải thích, không phải giám sát hạ tầng. Model, hạn mức và khả năng phục vụ phụ thuộc cấu hình và nhà cung cấp tại thời điểm dùng.</p>
+        </div>
       </div>
-      <figure class="architecture" aria-labelledby="architecture-title">
-        <figcaption id="architecture-title">Luồng kết nối khái quát: Client → API Gateway → Provider</figcaption>
-        <ol>
-          <li><h3>Client</h3><p>Ứng dụng của bạn gửi yêu cầu với model và API Key đã cấu hình.</p></li>
-          <li><h3>API Gateway</h3><p>Endpoint trung gian tiếp nhận key và chuyển yêu cầu đến nhà cung cấp phù hợp.</p></li>
-          <li><h3>Provider</h3><p>Nhà cung cấp xử lý model; kết quả trả về ứng dụng qua gateway.</p></li>
-        </ol>
-        <p>Đây là sơ đồ giải thích, không phải giám sát hạ tầng. Model, hạn mức và khả năng phục vụ phụ thuộc cấu hình và nhà cung cấp tại thời điểm dùng.</p>
-      </figure>
     </section>
 
     <section class="faq section" id="faq" aria-labelledby="faq-title">
