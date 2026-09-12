@@ -8,29 +8,30 @@
   <title>404 — Không tìm thấy trang | API Codex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260908b">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Merriweather:wght@700;900&display=optional" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260912-type1">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317365d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia' font-size='34' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E">
 </head>
 <body class="error-page">
+  <a class="skip-link" href="#top">Đến nội dung chính</a>
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="API Codex — về trang chủ">
       <span class="brand-mark" aria-hidden="true">C<span>/</span></span>
       <span>API Codex</span>
     </a>
-    <nav aria-label="Điều hướng chính">
+    <nav id="primary-nav" aria-label="Điều hướng chính">
       <a href="index.html#bang-gia">Bảng giá</a>
       <a href="index.html#dich-vu">Dịch vụ</a>
       <a href="index.html#dashboard">Dashboard</a>
       <a href="huong-dan.html">Hướng dẫn</a>
     </nav>
-    <a class="header-action" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Đăng ký qua Zalo</a>
-    <button class="menu-button" type="button" aria-label="Mở trình đơn" aria-expanded="false">
+    <a class="header-action button button-primary" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Đăng ký qua Zalo</a>
+    <button class="menu-button" type="button" aria-label="Mở trình đơn" aria-expanded="false" aria-controls="primary-nav">
       <span></span><span></span>
     </button>
   </header>
 
-  <main id="top" class="error-main">
+  <main id="top" tabindex="-1" class="error-main">
     <div class="error-container">
       <div class="error-badge">Mã lỗi 404</div>
       <h1>Trang bạn tìm kiếm<br>không tồn tại.</h1>
@@ -45,8 +46,8 @@
         <p>Liên kết hữu ích:</p>
         <ul>
           <li><a href="index.html#bang-gia">Bảng giá token từ 20.000đ</a></li>
-          <li><a href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener">Truy cập Dashboard ↗</a></li>
-          <li><a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Hỗ trợ Zalo: 0899759653 ↗</a></li>
+          <li><a class="button button-outline" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener">Truy cập Dashboard ↗</a></li>
+          <li><a class="button button-outline" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Hỗ trợ Zalo: 0899759653 ↗</a></li>
         </ul>
       </div>
     </div>
@@ -57,9 +58,9 @@
       <span class="brand-mark" aria-hidden="true">C<span>/</span></span>
       <span>API Codex</span>
     </a>
-    <p>Giải pháp tối ưu cho trải nghiệm AI.</p>
+    <p><a href="index.html#gioi-thieu">Về API Codex</a> · <a href="index.html#faq">FAQ</a> · <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> · <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">Cộng đồng</a></p>
     <span>© 2026 API Codex</span>
   </footer>
-  <script src="script.js?v=20260908b"></script>
+  <script src="script.js?v=20260912-type1"></script>
 </body>
 </html>

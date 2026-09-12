@@ -18,8 +18,8 @@
   <title>API Codex — Hiệu suất không giới hạn</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260908b">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Merriweather:wght@700;900&display=optional" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260912-type1">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317365d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia' font-size='34' font-weight='700' fill='white'%3EC%3C/text%3E%3C/svg%3E">
   <script type="application/ld+json">
   {
@@ -32,32 +32,33 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#top">Đến nội dung chính</a>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="API Codex — về đầu trang">
       <span class="brand-mark" aria-hidden="true">C<span>/</span></span>
       <span>API Codex</span>
     </a>
-    <nav aria-label="Điều hướng chính">
+    <nav id="primary-nav" aria-label="Điều hướng chính">
       <a href="#bang-gia">Bảng giá</a>
       <a href="#dich-vu">Dịch vụ</a>
       <a href="#dashboard">Dashboard</a>
       <a href="huong-dan.html">Hướng dẫn</a>
     </nav>
-    <a class="header-action" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Đăng ký qua Zalo</a>
-    <button class="menu-button" type="button" aria-label="Mở trình đơn" aria-expanded="false">
+    <a class="header-action button button-primary" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Đăng ký qua Zalo</a>
+    <button class="menu-button" type="button" aria-label="Mở trình đơn" aria-expanded="false" aria-controls="primary-nav">
       <span></span><span></span>
     </button>
   </header>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
     <section class="hero">
       <div class="hero-copy">
-        <p class="availability"><span></span> Hệ thống vận hành 24/7</p>
+        <p class="availability">API Key riêng · Hướng dẫn bằng tiếng Việt</p>
         <h1>Hiệu suất AI<br>không giới hạn.</h1>
         <p class="hero-lead">API Key riêng biệt, endpoint chuyên dụng và toàn bộ model OpenAI. Không còn rủi ro từ tài khoản Plus giá rẻ, không ổn định.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#bang-gia">Chọn gói token</a>
-          <a class="text-link" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener">Mở dashboard <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener">Mở dashboard <span aria-hidden="true">↗</span></a>
         </div>
         <p class="comparison">Tài khoản chính gốc <s>522.000đ</s> / API Codex từ <strong>20.000đ</strong></p>
       </div>
@@ -81,7 +82,7 @@
         <h2>Chỉ trả cho năng lực bạn cần.</h2>
         <p>Token trừ theo mức sử dụng thực tế. Mỗi gói có thời hạn một tháng kể từ ngày nạp.</p>
       </div>
-      <div class="price-table-wrap">
+      <div class="price-table-wrap" tabindex="0" role="region" aria-label="Bảng giá token, cuộn ngang để xem đủ cột">
         <table>
           <thead>
             <tr><th>Gói nạp</th><th>Tổng token</th><th>Tối đa/tuần</th><th>Tối đa/ngày</th><th>So với Plus</th></tr>
@@ -116,13 +117,14 @@
       <div class="dashboard-copy">
         <h2>Mọi token đều nhìn thấy.</h2>
         <p>Theo dõi mức sử dụng, API Key và số dư tại dashboard quản lý. Dữ liệu minh bạch theo mức dùng thực tế với biểu đồ phụ tải và số dư tài nguyên trực quan.</p>
+        <p class="security-note">Liên kết dashboard hiện dùng HTTP, không mã hóa đường truyền. Yêu cầu địa chỉ HTTPS được xác nhận trước khi nhập key hoặc dữ liệu nhạy cảm.</p>
         <dl>
           <div><dt>Guest password</dt><dd><button class="copy-value" data-copy="0899759653" type="button">0899759653 <span>Chép</span></button></dd></div>
-          <div><dt>Trạng thái</dt><dd><span class="status-dot"></span> Trực tuyến 24/7</dd></div>
+          <div><dt>Dữ liệu hiển thị</dt><dd>Ảnh minh họa, không phải trạng thái trực tiếp</dd></div>
         </dl>
         <div class="dashboard-actions">
           <a class="button button-light" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener">Truy cập dashboard</a>
-          <a href="http://apicodex.cloud-ip.cc:2455/apis" target="_blank" rel="noopener">Tra cứu API cá nhân</a>
+          <a class="button button-outline" href="http://apicodex.cloud-ip.cc:2455/apis" target="_blank" rel="noopener">Tra cứu API cá nhân</a>
         </div>
       </div>
       <div class="dashboard-visual">
@@ -135,12 +137,12 @@
         </div>
         <div class="dash-panel active" id="view-dash-lb" role="tabpanel" aria-labelledby="tab-dash-lb">
           <a class="dash-link-preview" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener noreferrer" title="Mở dashboard trực tiếp tại apicodex.cloud-ip.cc">
-            <img src="assets/dashboard-stats.png" alt="Giao diện dashboard quản trị và theo dõi phụ tải token CodexLB" width="1920" height="925">
-            <span class="dash-preview-badge">Mở dashboard thời gian thực ↗</span>
+            <img loading="lazy" decoding="async" src="assets/dashboard-stats.png" alt="Giao diện dashboard quản trị và theo dõi phụ tải token CodexLB" width="1920" height="925">
+            <span class="dash-preview-badge">Mở dashboard ↗</span>
           </a>
         </div>
         <div class="dash-panel" id="view-dash-app" role="tabpanel" aria-labelledby="tab-dash-app" hidden>
-          <img src="assets/document-1.png" alt="Giao diện Codex desktop app không bị tụt hạn mức khi dùng API" width="1920" height="1040">
+          <img loading="lazy" decoding="async" src="assets/document-1.png" alt="Giao diện Codex desktop app minh họa sử dụng API" width="1920" height="1040">
         </div>
       </div>
     </section>
@@ -158,16 +160,42 @@
           </ul>
           <div class="guide-actions">
             <a class="button button-primary" href="huong-dan.html">Xem toàn bộ hướng dẫn ↗</a>
-            <a class="text-link" href="https://docs.google.com/document/d/1rkvNwVLz3mEp2RrfsH9Akq5knTxJyN6_HLEKS-k7dc0" target="_blank" rel="noopener">Mở Google Docs gốc ↗</a>
+            <a class="button button-outline" href="https://docs.google.com/document/d/1rkvNwVLz3mEp2RrfsH9Akq5knTxJyN6_HLEKS-k7dc0" target="_blank" rel="noopener">Mở Google Docs gốc ↗</a>
           </div>
         </div>
         <div class="guide-teaser-visual">
           <div class="figure-frame">
-            <img src="assets/document-2.png?v=2" alt="Giao diện minh họa cấu hình config.toml thực tế sau khi lưu" width="1444" height="1017">
+            <img loading="lazy" decoding="async" src="assets/document-2.png?v=2" alt="Giao diện minh họa cấu hình config.toml thực tế sau khi lưu" width="1444" height="1017">
           </div>
           <span class="teaser-caption">Minh họa cấu hình thực tế khi mở và lưu file config.toml</span>
         </div>
       </div>
+    </section>
+
+    <section class="about section" id="gioi-thieu" aria-labelledby="about-title">
+      <div class="section-intro">
+        <h2 id="about-title">Về API Codex</h2>
+        <p>API Codex giới thiệu các gói token, cung cấp đầu mối nhận API Key qua Zalo và hướng dẫn kết nối ứng dụng Codex. Bạn dùng key riêng thay vì chia sẻ tài khoản.</p>
+      </div>
+      <figure class="architecture" aria-labelledby="architecture-title">
+        <figcaption id="architecture-title">Luồng kết nối khái quát: Client → API Gateway → Provider</figcaption>
+        <ol>
+          <li><h3>Client</h3><p>Ứng dụng của bạn gửi yêu cầu với model và API Key đã cấu hình.</p></li>
+          <li><h3>API Gateway</h3><p>Endpoint trung gian tiếp nhận key và chuyển yêu cầu đến nhà cung cấp phù hợp.</p></li>
+          <li><h3>Provider</h3><p>Nhà cung cấp xử lý model; kết quả trả về ứng dụng qua gateway.</p></li>
+        </ol>
+        <p>Đây là sơ đồ giải thích, không phải giám sát hạ tầng. Model, hạn mức và khả năng phục vụ phụ thuộc cấu hình và nhà cung cấp tại thời điểm dùng.</p>
+      </figure>
+    </section>
+
+    <section class="faq section" id="faq" aria-labelledby="faq-title">
+      <div class="section-intro"><h2 id="faq-title">Câu hỏi thường gặp</h2><p>Kiểm tra điều kiện trước khi nạp; giữ kín key trong suốt quá trình sử dụng.</p></div>
+      <details><summary>Bắt đầu và nhận API Key thế nào?</summary><p>Chọn gói trong bảng giá, liên hệ Zalo 0899759653 để xác nhận giá, hạn mức, thời hạn và cách nhận key trước khi thanh toán. Sau đó làm theo <a href="huong-dan.html">hướng dẫn cấu hình</a>.</p></details>
+      <details><summary>Token hết hạn hoặc chạm hạn mức thì sao?</summary><p>Theo bảng giá hiện tại, gói có thời hạn một tháng từ ngày nạp, kèm giới hạn ngày hoặc tuần tùy gói. Kiểm tra số dư trên dashboard và hỏi Zalo về thời điểm đặt lại hạn mức, token còn dư và điều kiện nạp tiếp.</p></details>
+      <details><summary>Có đảm bảo mọi model và uptime không?</summary><p>Trang này không đo uptime hay trạng thái trực tiếp. Ảnh dashboard chỉ minh họa. Hãy xác nhận model đang hỗ trợ và giới hạn thực tế qua Zalo trước khi chọn gói; không xem bảng so sánh token là cam kết tốc độ hay chất lượng.</p></details>
+      <details><summary>Lỗi 401, 429 hoặc không kết nối được?</summary><p>Với 401, kiểm tra key và biến môi trường, rồi mở lại ứng dụng. Với 429, kiểm tra hạn mức và chờ trước khi thử lại. Nếu không kết nối được, kiểm tra mạng và endpoint; gửi mã lỗi, thời điểm gặp lỗi qua Zalo, không gửi API Key hoặc nội dung nhạy cảm.</p></details>
+      <details><summary>Dữ liệu và API Key cần bảo vệ thế nào?</summary><p>Không đưa key vào mã frontend, kho mã hay ảnh chụp công khai. Yêu cầu đi qua gateway và provider; hãy hỏi rõ cách lưu trữ, xử lý dữ liệu trước khi gửi thông tin nhạy cảm. Nếu lộ key, ngừng dùng và liên hệ để yêu cầu đổi hoặc thu hồi.</p><p>Endpoint và dashboard hiện được niêm yết bằng HTTP, không mã hóa đường truyền. Hãy yêu cầu địa chỉ HTTPS được xác nhận trước khi truyền API Key hoặc dữ liệu nhạy cảm.</p></details>
+      <details><summary>Liên hệ ai, có chính sách hoàn tiền không?</summary><p>Tên được công bố trên website là API Codex; kênh liên hệ là <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> và <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">nhóm cộng đồng</a>. Website chưa công bố pháp nhân, địa chỉ đăng ký hay chính sách hoàn tiền. Hãy xác nhận điều kiện giao dịch trực tiếp trước khi thanh toán.</p></details>
     </section>
 
     <section class="signup section" id="dang-ky">
@@ -185,9 +213,9 @@
       <span class="brand-mark" aria-hidden="true">C<span>/</span></span>
       <span>API Codex</span>
     </a>
-    <p>Giải pháp tối ưu cho trải nghiệm AI.</p>
+    <p><a href="#gioi-thieu">Về API Codex</a> · <a href="#faq">FAQ</a> · <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> · <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">Cộng đồng</a></p>
     <span>© 2026 API Codex</span>
   </footer>
-  <script src="script.js?v=20260908b"></script>
+  <script src="script.js?v=20260912-type1"></script>
 </body>
 </html>
