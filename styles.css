@@ -89,11 +89,18 @@ code, pre { font-family: var(--mono); }
   background: var(--navy);
   color: #fff;
   border-radius: var(--radius-sm);
-  font-family: var(--display);
-  font-size: 0.9375rem;
-  font-weight: 800;
+  flex-shrink: 0;
+  transition: transform .25s ease, background-color .25s ease;
 }
-.brand-mark span { color: #8fd8bc; }
+.brand:hover .brand-mark {
+  transform: rotate(30deg) scale(1.04);
+  background: var(--blue);
+}
+.brand-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
 .site-header nav {
   display: flex;
   gap: 32px;
