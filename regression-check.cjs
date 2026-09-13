@@ -10,8 +10,10 @@ async function main() {
     const html = read(name)
     assert.match(html, /aria-controls="primary-nav"/)
     assert.match(html, /class="skip-link"/)
-    assert.match(html, /styles\.css\?v=20260912-apple1/)
-    assert.match(html, /script\.js\?v=20260912-apple1/)
+    assert.match(html, /styles\.css\?v=20260913-gsap1/)
+    assert.match(html, /script\.js\?v=20260913-gsap1/)
+    assert.match(html, /assets\/gsap\.min\.js/)
+    assert.match(html, /assets\/ScrollTrigger\.min\.js/)
     assert.match(html, /class="header-action button button-primary"/)
     assert.doesNotMatch(html, /không mã hóa đường truyền|giám sát hạ tầng/)
     const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)[1]

@@ -65,6 +65,10 @@ document.querySelectorAll('[role="tablist"]').forEach((list) => {
         panel.hidden = !selected
         panel.classList.toggle('active', selected)
         panel.tabIndex = 0
+        if (selected && typeof gsap !== 'undefined') {
+          gsap.fromTo(panel, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' })
+          if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh()
+        }
       }
     })
   }
@@ -133,35 +137,242 @@ document.querySelectorAll('img[loading="lazy"]').forEach((image) => {
     frame.setAttribute('aria-busy', String(loading))
     status.textContent = loading ? 'Đang tải ảnh…' : failed ? 'Không tải được ảnh. Thử tải lại trang.' : ''
     status.hidden = !loading && !failed
+    if (!loading && typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh()
   }
   image.addEventListener('load', update)
   image.addEventListener('error', update)
   update()
 })
 
-if (typeof IntersectionObserver !== 'undefined') {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-        observer.unobserve(entry.target)
-      }
-    })
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' })
+if (typeof gsap !== 'undefined') {
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger)
+  }
+  gsap.defaults({ ease: 'power3.out', duration: 0.8 })
 
-  document.querySelectorAll('.hero, .section-intro, .hero-meter, .price-table-wrap, .service-list article, .dashboard-visual, .arch-node, .arch-connector, .faq details, .step-card, .toml-viewer, .figure-frame').forEach((el) => {
-    el.classList.add('reveal-item')
-    observer.observe(el)
+  const mm = gsap.matchMedia()
+
+  mm.add({
+    isDesktop: '(min-width: 993px)',
+    isMobile: '(max-width: 992px)',
+    reduceMotion: '(prefers-reduced-motion: reduce)'
+  }, (context) => {
+    const { isDesktop, reduceMotion } = context.conditions
+
+    if (reduceMotion) {
+      gsap.set('.hero, .hero-meter, .section-intro, .price-table-wrap, .service-list article, .dashboard-visual, .architecture, .arch-node, .arch-connector, .faq details, .signup > div, .step-card, .doc-hero-inner > *', {
+        autoAlpha: 1,
+        y: 0,
+        x: 0,
+        scale: 1,
+        clearProps: 'all'
+      })
+      return
+    }
+
+    if (document.querySelector('.hero')) {
+      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+      heroTl
+        .fromTo('.site-header', { y: -16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.65 })
+        .fromTo('.hero .availability', { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, '-=0.35')
+        .fromTo('.hero h1', { y: 28, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.75 }, '-=0.35')
+        .fromTo('.hero .hero-lead', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.65 }, '-=0.45')
+        .fromTo('.hero .hero-actions .button', { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.08, duration: 0.55 }, '-=0.4')
+        .fromTo('.hero .comparison', { y: 10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.45 }, '-=0.3')
+        .fromTo('.hero-meter', { y: 35, scale: 0.96, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.85, ease: 'power3.out' }, '-=0.65')
+        .fromTo('.meter-track span', { width: '0%' }, { width: '72%', duration: 1.1, ease: 'power2.out' }, '-=0.35')
+        .fromTo('.meter-data div', { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.07, duration: 0.45 }, '-=0.55')
+
+      if (isDesktop) {
+        gsap.to('.hero-meter', {
+          y: 36,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1
+          }
+        })
+      }
+    }
+
+    document.querySelectorAll('.section-intro').forEach((intro) => {
+      gsap.fromTo(intro.children, { y: 24, autoAlpha: 0 }, {
+        y: 0,
+        autoAlpha: 1,
+        stagger: 0.1,
+        duration: 0.75,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: intro,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      })
+    })
+
+    if (document.querySelector('.price-table-wrap')) {
+      gsap.fromTo('.price-table-wrap', { y: 28, scale: 0.98, autoAlpha: 0 }, {
+        y: 0,
+        scale: 1,
+        autoAlpha: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.price-table-wrap',
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      })
+    }
+
+    if (document.querySelector('.service-list')) {
+      gsap.fromTo('.service-list article', { x: -20, autoAlpha: 0 }, {
+        x: 0,
+        autoAlpha: 1,
+        stagger: 0.12,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.service-list',
+          start: 'top 82%',
+          toggleActions: 'play none none none'
+        }
+      })
+    }
+
+    if (document.querySelector('.dashboard')) {
+      const dashTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.dashboard',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      })
+      dashTl
+        .fromTo('.dashboard-copy', { y: 28, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.75 })
+        .fromTo('.dashboard-visual', { y: 35, scale: 0.97, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.85, ease: 'power3.out' }, '-=0.45')
+
+      if (isDesktop) {
+        gsap.to('.dashboard-visual', {
+          y: 28,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.dashboard',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        })
+      }
+    }
+
+    if (document.querySelector('.guide-teaser')) {
+      const guideTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.guide-teaser',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      })
+      guideTl
+        .fromTo('.guide-teaser-copy > *', { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.08, duration: 0.65 })
+        .fromTo('.guide-teaser-visual', { y: 30, scale: 0.97, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.75 }, '-=0.35')
+    }
+
+    if (document.querySelector('.architecture')) {
+      const archTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.architecture',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      })
+      archTl
+        .fromTo('.arch-header', { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 })
+        .fromTo('.arch-node[data-node="client"]', { y: 22, scale: 0.96, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.55 }, '-=0.2')
+        .fromTo('.arch-connector:nth-child(2)', { scaleY: 0, autoAlpha: 0 }, { scaleY: 1, autoAlpha: 1, transformOrigin: 'top center', duration: 0.35 }, '-=0.15')
+        .fromTo('.arch-node[data-node="gateway"]', { y: 22, scale: 0.96, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.55 }, '-=0.15')
+        .fromTo('.arch-connector:nth-child(4)', { scaleY: 0, autoAlpha: 0 }, { scaleY: 1, autoAlpha: 1, transformOrigin: 'top center', duration: 0.35 }, '-=0.15')
+        .fromTo('.arch-node[data-node="provider"]', { y: 22, scale: 0.96, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.55 }, '-=0.15')
+    }
+
+    if (document.querySelector('.faq details')) {
+      gsap.fromTo('.faq details', { y: 14, autoAlpha: 0 }, {
+        y: 0,
+        autoAlpha: 1,
+        stagger: 0.06,
+        duration: 0.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.faq',
+          start: 'top 82%',
+          toggleActions: 'play none none none'
+        }
+      })
+    }
+
+    if (document.querySelector('.signup')) {
+      gsap.fromTo('.signup > div', { y: 24, autoAlpha: 0 }, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.7,
+        scrollTrigger: {
+          trigger: '.signup',
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      })
+    }
+
+    if (document.querySelector('.doc-hero')) {
+      gsap.fromTo('.doc-hero-inner > *', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.08, duration: 0.6 })
+    }
+    document.querySelectorAll('.step-card').forEach((card) => {
+      gsap.fromTo(card, { y: 26, scale: 0.98, autoAlpha: 0 }, {
+        y: 0,
+        scale: 1,
+        autoAlpha: 1,
+        duration: 0.65,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      })
+    })
+
+    if (document.querySelector('.error-container')) {
+      gsap.fromTo('.error-container > *', { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.08, duration: 0.6 })
+    }
+  })
+
+  document.querySelectorAll('.button').forEach((btn) => {
+    btn.addEventListener('mouseenter', () => {
+      gsap.to(btn, { scale: 1.02, duration: 0.2, ease: 'power2.out', overwrite: 'auto' })
+    })
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { scale: 1, duration: 0.2, ease: 'power2.out', overwrite: 'auto' })
+    })
+    btn.addEventListener('mousedown', () => {
+      gsap.to(btn, { scale: 0.97, duration: 0.1, ease: 'power2.out', overwrite: 'auto' })
+    })
+    btn.addEventListener('mouseup', () => {
+      gsap.to(btn, { scale: 1.02, duration: 0.15, ease: 'power2.out', overwrite: 'auto' })
+    })
+  })
+
+  document.querySelectorAll('.arch-node').forEach((node) => {
+    const icon = node.querySelector('.node-icon-box')
+    node.addEventListener('mouseenter', () => {
+      gsap.to(node, { y: -3, scale: 1.012, boxShadow: '0 14px 32px -8px rgba(23, 54, 93, 0.12)', duration: 0.25, ease: 'power2.out', overwrite: 'auto' })
+      if (icon) gsap.to(icon, { scale: 1.08, rotate: 2, duration: 0.25, ease: 'back.out(1.4)', overwrite: 'auto' })
+    })
+    node.addEventListener('mouseleave', () => {
+      gsap.to(node, { y: 0, scale: 1, boxShadow: '0 4px 16px -4px rgba(23, 54, 93, 0.04)', duration: 0.25, ease: 'power2.out', overwrite: 'auto' })
+      if (icon) gsap.to(icon, { scale: 1, rotate: 0, duration: 0.25, ease: 'power2.out', overwrite: 'auto' })
+    })
   })
 }
-
-document.querySelectorAll('.arch-node').forEach((node) => {
-  node.addEventListener('mouseenter', () => {
-    node.closest('.architecture-flow')?.classList.add('is-hovering')
-    node.classList.add('is-active')
-  })
-  node.addEventListener('mouseleave', () => {
-    node.closest('.architecture-flow')?.classList.remove('is-hovering')
-    node.classList.remove('is-active')
-  })
-})
