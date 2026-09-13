@@ -25,6 +25,8 @@ async function main() {
       if (id) assert.ok(target.includes(`id="${id}"`), `${name}: broken link ${href}`)
     }
     assert.doesNotMatch(html, /Hệ thống vận hành 24\/7|Trực tuyến 24\/7|Mở dashboard thời gian thực/)
+    assert.doesNotMatch(html, /:2455\/dashboard|:2455\/apis|Guest password|0899759653\s*<span>Chép<\/span>/)
+    assert.match(html, /http:\/\/apicodex\.cloud-ip\.cc:2456\//)
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
     assert.equal(new Set(ids).size, ids.length, `${name}: duplicate IDs`)
     for (const match of html.matchAll(/aria-controls="([^"]+)"/g)) assert.ok(ids.includes(match[1]))

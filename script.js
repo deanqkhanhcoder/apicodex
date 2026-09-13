@@ -126,7 +126,7 @@ document.addEventListener('click', async (event) => {
 })
 
 document.querySelectorAll('img[loading="lazy"]').forEach((image) => {
-  const frame = image.closest('.figure-frame, .dash-panel')
+  const frame = image.closest('.figure-frame, .dash-panel, .portal-window-preview')
   if (!frame) return
   const status = document.createElement('span')
   status.className = 'image-status'
@@ -160,7 +160,7 @@ if (typeof gsap !== 'undefined') {
     const { isDesktop, reduceMotion } = context.conditions
 
     if (reduceMotion) {
-      gsap.set('.hero, .hero-meter, .section-intro, .price-table-wrap, .service-list article, .dashboard-visual, .architecture, .arch-node, .arch-connector, .faq details, .signup > div, .step-card, .doc-hero-inner > *', {
+      gsap.set('.hero, .hero-meter, .section-intro, .price-table-wrap, .service-list article, .portal-step-card, .portal-window, .architecture, .arch-node, .arch-connector, .faq details, .signup > div, .step-card, .doc-hero-inner > *', {
         autoAlpha: 1,
         y: 0,
         x: 0,
@@ -242,24 +242,25 @@ if (typeof gsap !== 'undefined') {
       })
     }
 
-    if (document.querySelector('.dashboard')) {
-      const dashTl = gsap.timeline({
+    if (document.querySelector('.portal')) {
+      const portalTl = gsap.timeline({
         scrollTrigger: {
-          trigger: '.dashboard',
+          trigger: '.portal',
           start: 'top 80%',
           toggleActions: 'play none none none'
         }
       })
-      dashTl
-        .fromTo('.dashboard-copy', { y: 28, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.75 })
-        .fromTo('.dashboard-visual', { y: 35, scale: 0.97, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.85, ease: 'power3.out' }, '-=0.45')
+      portalTl
+        .fromTo('.portal-header', { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.65 })
+        .fromTo('.portal-step-card', { y: 28, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.1, duration: 0.6, ease: 'power2.out' }, '-=0.35')
+        .fromTo('.portal-window', { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, ease: 'power3.out' }, '-=0.25')
 
       if (isDesktop) {
-        gsap.to('.dashboard-visual', {
-          y: 28,
+        gsap.to('.portal-window', {
+          y: 20,
           ease: 'none',
           scrollTrigger: {
-            trigger: '.dashboard',
+            trigger: '.portal',
             start: 'top bottom',
             end: 'bottom top',
             scrub: 1.2

@@ -42,7 +42,7 @@
     <nav id="primary-nav" aria-label="Điều hướng chính">
       <a href="#bang-gia">Bảng giá</a>
       <a href="#dich-vu">Dịch vụ</a>
-      <a href="#dashboard">Dashboard</a>
+      <a href="#portal">Tra cứu hạn mức</a>
       <a href="huong-dan.html">Hướng dẫn</a>
     </nav>
     <a class="header-action button button-primary" href="https://zalo.me/0899759653" target="_blank" rel="noopener">Đăng ký qua Zalo</a>
@@ -59,7 +59,7 @@
         <p class="hero-lead">API Key riêng biệt, endpoint chuyên dụng và toàn bộ model OpenAI. Không còn rủi ro từ tài khoản Plus giá rẻ, không ổn định.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#bang-gia">Chọn gói token</a>
-          <a class="button button-outline" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener">Mở dashboard <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="http://apicodex.cloud-ip.cc:2456/" target="_blank" rel="noopener">Tra cứu Portal <span aria-hidden="true">↗</span></a>
         </div>
         <p class="comparison">Tài khoản chính gốc <s>522.000đ</s> / API Codex từ <strong>20.000đ</strong></p>
       </div>
@@ -114,34 +114,79 @@
       </div>
     </section>
 
-    <section class="dashboard section" id="dashboard">
-      <div class="dashboard-copy">
-        <h2>Mọi token đều nhìn thấy.</h2>
-        <p>Theo dõi mức sử dụng, API Key và số dư tại dashboard quản lý. Dữ liệu minh bạch theo mức dùng thực tế với biểu đồ phụ tải và số dư tài nguyên trực quan.</p>
-        <dl>
-          <div><dt>Guest password</dt><dd><button class="copy-value" data-copy="0899759653" type="button">0899759653 <span>Chép</span></button></dd></div>
-        </dl>
-        <div class="dashboard-actions">
-          <a class="button button-light" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener">Truy cập dashboard</a>
-          <a class="button button-outline" href="http://apicodex.cloud-ip.cc:2455/apis" target="_blank" rel="noopener">Tra cứu API cá nhân</a>
-        </div>
+    <section class="portal section" id="portal">
+      <span id="dashboard" class="scroll-target" aria-hidden="true"></span>
+      <div class="portal-header">
+        <p class="section-tag">Self-service Portal</p>
+        <h2>Tra cứu hạn mức &amp; Quản lý Key.</h2>
+        <p class="portal-lead">Chủ động kiểm tra mức sử dụng, hạn mức và cấu hình API Key trên hệ thống Self-service Portal chuyên dụng. Quy trình 3 bước minh bạch theo thời gian thực.</p>
       </div>
-      <div class="dashboard-visual">
+
+      <div class="portal-flow-grid">
+        <article class="portal-step-card">
+          <div class="step-card-header">
+            <span class="step-card-num">01</span>
+            <span class="step-card-pill">Đăng nhập</span>
+          </div>
+          <h3>Đăng nhập bằng API Key</h3>
+          <p>Nhập chuỗi <code>CODEX_LB_API_KEY</code> cá nhân được cấp để truy cập Portal trực tiếp. Cơ chế xác thực token riêng biệt, không cần tài khoản chung hay mật khẩu phụ.</p>
+          <div class="step-card-meta">
+            <span>Xác thực token riêng</span>
+            <span>Không dùng mật khẩu khách</span>
+          </div>
+        </article>
+
+        <article class="portal-step-card">
+          <div class="step-card-header">
+            <span class="step-card-num">02</span>
+            <span class="step-card-pill">Giám sát</span>
+          </div>
+          <h3>Dashboard tổng quan</h3>
+          <p>Theo dõi tức thì 4 chỉ số cốt lõi: Tổng Requests thành công, Tổng Tokens (In/Out), Chi phí tạm tính (USD) và hạn mức dùng chung cluster (5-Hour &amp; Weekly Pooled Credits).</p>
+          <div class="step-card-meta">
+            <span>Requests &amp; Tokens In/Out</span>
+            <span>Biểu đồ phụ tải 7 ngày</span>
+          </div>
+        </article>
+
+        <article class="portal-step-card">
+          <div class="step-card-header">
+            <span class="step-card-num">03</span>
+            <span class="step-card-pill">Chi tiết</span>
+          </div>
+          <h3>APIs chi tiết key</h3>
+          <p>Quản lý thông tin chuyên sâu của key: Traffic Class, Allowed Models, bảng quy tắc hạn mức riêng (Limit Rules theo ngày/tuần) và bảng lịch sử sử dụng chi tiết 14 ngày.</p>
+          <div class="step-card-meta">
+            <span>Limit Rules ngày &amp; tuần</span>
+            <span>Lịch sử chi tiết 14 ngày</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="portal-window">
         <div class="window-bar">
           <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="dash-tabs" role="tablist" aria-label="Chế độ hiển thị dashboard">
-            <button type="button" class="dash-tab active" id="tab-dash-lb" role="tab" aria-selected="true" aria-controls="view-dash-lb">Dashboard CodexLB</button>
-            <button type="button" class="dash-tab" id="tab-dash-app" role="tab" aria-selected="false" aria-controls="view-dash-app">Codex App thực tế</button>
+          <div class="portal-address-bar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+            <span>http://apicodex.cloud-ip.cc:2456/</span>
           </div>
+          <span class="portal-online-tag"><span class="status-dot"></span>Port 2456</span>
         </div>
-        <div class="dash-panel active" id="view-dash-lb" role="tabpanel" aria-labelledby="tab-dash-lb">
-          <a class="dash-link-preview" href="http://apicodex.cloud-ip.cc:2455/dashboard" target="_blank" rel="noopener noreferrer" title="Mở dashboard trực tiếp tại apicodex.cloud-ip.cc">
-            <img loading="lazy" decoding="async" src="assets/dashboard-stats.png" alt="Giao diện dashboard quản trị và theo dõi phụ tải token CodexLB" width="1920" height="925">
-            <span class="dash-preview-badge">Mở dashboard ↗</span>
+        <div class="portal-window-preview">
+          <a class="portal-link-preview" href="http://apicodex.cloud-ip.cc:2456/" target="_blank" rel="noopener" title="Mở Self-service Portal trực tiếp tại apicodex.cloud-ip.cc:2456">
+            <img loading="lazy" decoding="async" src="assets/portal-dashboard.png" alt="Giao diện Self-service Portal tra cứu hạn mức và chi tiết API Key Codex LB" width="1920" height="925">
+            <span class="portal-preview-badge">Mở Portal tra cứu ↗</span>
           </a>
         </div>
-        <div class="dash-panel" id="view-dash-app" role="tabpanel" aria-labelledby="tab-dash-app" hidden>
-          <img loading="lazy" decoding="async" src="assets/document-1.png" alt="Giao diện Codex desktop app minh họa sử dụng API" width="1920" height="1040">
+        <div class="portal-window-content">
+          <div class="portal-card-desc">
+            <h4>Cổng tự phục vụ dành riêng cho người dùng API Codex</h4>
+            <p>Dữ liệu được lọc nghiêm ngặt từ backend Codex-LB, mỗi API Key chỉ hiển thị thông số và hạn mức của chính người dùng. Mọi thay đổi về hạn mức hoặc số dư đều được cập nhật tức thì.</p>
+          </div>
+          <div class="portal-card-actions">
+            <a class="button button-primary" href="http://apicodex.cloud-ip.cc:2456/" target="_blank" rel="noopener">Truy cập Portal tra cứu <span aria-hidden="true">↗</span></a>
+            <a class="button button-outline" href="huong-dan.html">Xem hướng dẫn cấu hình</a>
+          </div>
         </div>
       </div>
     </section>
@@ -275,7 +320,7 @@
     <section class="faq section" id="faq" aria-labelledby="faq-title">
       <div class="section-intro"><h2 id="faq-title">Câu hỏi thường gặp</h2><p>Giải đáp nhanh về kích hoạt token, model hỗ trợ và kênh chăm sóc khách hàng.</p></div>
       <details><summary>Bắt đầu và nhận API Key thế nào?</summary><p>Chọn gói nạp phù hợp trong bảng giá, liên hệ <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> để nhận API Key riêng và làm theo <a href="huong-dan.html">hướng dẫn cấu hình</a> nhanh trong 3 phút.</p></details>
-      <details><summary>Thời hạn và cách gia hạn gói token?</summary><p>Mỗi gói có thời hạn sử dụng 30 ngày kể từ ngày kích hoạt. Bạn có thể theo dõi số dư trực tiếp trên dashboard và gia hạn hoặc nâng gói linh hoạt bất kỳ lúc nào qua Zalo.</p></details>
+      <details><summary>Thời hạn và cách gia hạn gói token?</summary><p>Mỗi gói có thời hạn sử dụng 30 ngày kể từ ngày kích hoạt. Bạn có thể theo dõi số dư và hạn mức trực tiếp trên <a href="http://apicodex.cloud-ip.cc:2456/" target="_blank" rel="noopener">Portal tra cứu</a> và gia hạn hoặc nâng gói linh hoạt bất kỳ lúc nào qua Zalo.</p></details>
       <details><summary>Hệ thống hỗ trợ những model OpenAI nào?</summary><p>API Codex hỗ trợ danh mục model OpenAI mới nhất (gpt-6-astra, gpt-5.6-terra, gpt-4o), mở khóa toàn bộ plugin, browser và subagent trên ứng dụng Codex.</p></details>
       <details><summary>Lỗi 401, 429 hoặc cần hỗ trợ kỹ thuật?</summary><p>Với 401, kiểm tra lại key và biến môi trường. Với 429, chờ reset hạn mức ngày. Đội ngũ kỹ thuật hỗ trợ trực tiếp qua Zalo để kiểm tra cấu hình và cấp lại key nhanh chóng.</p></details>
       <details><summary>Có thể sử dụng API Codex trên những nền tảng nào?</summary><p>Tương thích mượt mà với ứng dụng Codex trên Windows, macOS, Linux, đồng thời hỗ trợ Kiro, Cursor, Antigravity và mọi công cụ lập trình AI hỗ trợ custom OpenAI endpoint.</p></details>
@@ -301,7 +346,7 @@
       </span>
       <span>API Codex</span>
     </a>
-    <p><a href="#gioi-thieu">Về API Codex</a> · <a href="#faq">FAQ</a> · <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> · <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">Cộng đồng</a></p>
+    <p><a href="#gioi-thieu">Về API Codex</a> · <a href="#portal">Portal</a> · <a href="#faq">FAQ</a> · <a href="https://zalo.me/0899759653" target="_blank" rel="noopener">Zalo 0899759653</a> · <a href="https://zalo.me/g/g6anmyvrd019pvgnmpe6" target="_blank" rel="noopener">Cộng đồng</a></p>
     <span>© 2026 API Codex</span>
   </footer>
   <script src="assets/gsap.min.js"></script>
