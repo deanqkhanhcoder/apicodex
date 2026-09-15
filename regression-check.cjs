@@ -50,6 +50,34 @@ async function main() {
   assert.match(read('huong-dan.html'), /<h1>Hướng dẫn setup Codex config cho người mới<\/h1>/)
   assert.match(read('index.html'), /Client → API Gateway → Provider/)
   assert.equal([...read('index.html').matchAll(/<details>/g)].length, 6)
+
+  const indexHtml = read('index.html')
+  assert.doesNotMatch(indexHtml, /20 triệu token/)
+  assert.match(indexHtml, /10\.000đ \/ 15 triệu token/)
+  assert.match(indexHtml, /aria-label="Gói được khuyến nghị: 525 triệu token"/)
+  assert.match(indexHtml, /Hiệu suất 1,544x Plus/)
+
+  const tbody = indexHtml.match(/<tbody>(.*?)<\/tbody>/s)[1]
+  const tableRows = [...tbody.matchAll(/<tr\b/g)]
+  assert.equal(tableRows.length, 7, 'Price table must have exactly 7 package rows')
+
+  const expectedTable = [
+    ['20.000đ', '30 triệu', '15 triệu', '—', '0,088x', '46.059đ'],
+    ['50.000đ', '75 triệu', '37,5 triệu', '—', '0,221x', '115.147đ'],
+    ['100.000đ', '150 triệu', '75 triệu', '—', '0,441x', '230.294đ'],
+    ['200.000đ', '300 triệu', '150 triệu', '75 triệu', '0,882x', '460.588đ'],
+    ['300.000đ', '525 triệu', '262,5 triệu', '150 triệu', '1,544x', '806.029đ'],
+    ['500.000đ', '900 triệu', '375 triệu', '225 triệu', '2,647x', '1.381.765đ'],
+    ['1.000.000đ', '1,875 tỷ', '600 triệu', '300 triệu', '5,515x', '2.878.676đ']
+  ]
+
+  expectedTable.forEach(([price, total, week, day, plus, equiv]) => {
+    assert.ok(indexHtml.includes(total), `Missing total ${total}`)
+    assert.ok(indexHtml.includes(week), `Missing week ${week}`)
+    if (day !== '—') assert.ok(indexHtml.includes(day), `Missing day ${day}`)
+    assert.ok(indexHtml.includes(plus), `Missing plus ratio ${plus}`)
+    assert.ok(indexHtml.includes(equiv), `Missing equivalent price ${equiv}`)
+  })
   const listeners = {}
   const timers = new Map()
   let timerId = 0
